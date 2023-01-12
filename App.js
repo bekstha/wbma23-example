@@ -1,5 +1,5 @@
 import {StatusBar} from 'expo-status-bar';
-import Navigator from './navigators/Navigator,js';
+import Navigator from './navigators/Navigator.js';
 
 const App = () => {
   return (
