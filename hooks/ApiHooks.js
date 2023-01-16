@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import {baseUrl} from '../utils/variables';
+import Login from '../views/Login';
 
 const useMedia = () => {
   const [mediaArray, setMediaArray] = useState([]);
@@ -27,4 +28,12 @@ const useMedia = () => {
   return {mediaArray};
 };
 
-export {useMedia};
+const useAuthentication = () => {
+  const postLogin = async () => {};
+};
+
+const useUser = () => {
+  const checkUser = async () => {};
+};
+
+export {useMedia, useAuthentication, useUser};
