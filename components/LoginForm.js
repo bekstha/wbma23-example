@@ -16,7 +16,6 @@ const LoginForm = (props) => {
   } = useForm({
     defaultValues: {username: '', password: ''},
   });
-
   const logIn = async (loginData) => {
     console.log('Login button pressed', loginData);
     // const data = {username: 'ilkkamtk', password: 'q1w2e3r4'};

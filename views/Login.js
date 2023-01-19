@@ -30,7 +30,6 @@ const Login = ({navigation}) => {
       console.error('checkToken', error);
     }
   };
-
   useEffect(() => {
     checkToken();
   }, []);

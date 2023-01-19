@@ -15,7 +15,6 @@ const RegisterForm = (props) => {
   } = useForm({
     defaultValues: {username: '', password: '', email: '', fullname: ''},
   });
-
   const register = async (registerData) => {
     console.log('Register button pressed', registerData);
     // const data = {username: 'bibekShrestha', password: 'examplepass'};

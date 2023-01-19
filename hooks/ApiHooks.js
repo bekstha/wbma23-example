@@ -75,7 +75,6 @@ const useUser = () => {
       throw new Error('checkUser: ' + error.message);
     }
   };
-
   const postUser = async (userData) => {
     // user credentials format: {username: 'someUsername', password: 'somePassword'}
     const options = {
