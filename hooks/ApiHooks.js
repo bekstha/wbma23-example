@@ -76,9 +76,7 @@ const useUser = () => {
     }
   };
   const postUser = async (userData) => {
-    // user credentials format: {username: 'someUsername', password: 'somePassword'}
     const options = {
-      // TODO: add method, headers and body for sending json data with POST
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -86,7 +84,6 @@ const useUser = () => {
       body: JSON.stringify(userData),
     };
     try {
-      // TODO: use fetch to send request to login endpoint and return the result as json, handle errors with try/catch and response.ok
       return await doFetch(baseUrl + 'users', options);
     } catch (error) {
       throw new Error('postUser: ' + error.message);
@@ -95,4 +92,15 @@ const useUser = () => {
   return {getUserByToken, postUser};
 };
 
-export {useMedia, useAuthentication, useUser};
+const useTag = () => {
+  const getFilesByTag = async (tag) => {
+    try {
+      return await doFetch(baseUrl + 'tags/' + tag);
+    } catch (error) {
+      throw new Error('getFilesByTag, ' + error.message);
+    }
+  };
+  return {getFilesByTag};
+};
+
+export {useMedia, useAuthentication, useUser, useTag};
