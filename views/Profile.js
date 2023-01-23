@@ -18,7 +18,6 @@ const Profile = () => {
       console.log('user avatar fetch failed', error.message);
     }
   };
-
   useEffect(() => {
     loadAvatar();
   }, []);
