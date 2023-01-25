@@ -4,7 +4,6 @@ import {View} from 'react-native';
 import {useUser} from '../hooks/ApiHooks';
 import {Controller, useForm} from 'react-hook-form';
 import {Card, Input, Button, Text} from '@rneui/themed';
-
 const RegisterForm = (props) => {
   // const {setIsLoggedIn} = useContext(MainContext);
   // const {postLogin} = useAuthentication();
