@@ -2,12 +2,10 @@ import React, {useContext} from 'react';
 import {MainContext} from '../contexts/MainContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useAuthentication} from '../hooks/ApiHooks';
-
-import {Button, Text, View} from 'react-native';
 import {Controller, useForm} from 'react-hook-form';
-import {Card, Input} from '@rneui/themed';
+import {Button, Input, Card} from '@rneui/themed';
 
-const LoginForm = (props) => {
+const LoginForm = () => {
   const {setIsLoggedIn, setUser} = useContext(MainContext);
   const {postLogin} = useAuthentication();
   const {
@@ -17,6 +15,7 @@ const LoginForm = (props) => {
   } = useForm({
     defaultValues: {username: '', password: ''},
   });
+
   const logIn = async (loginData) => {
     console.log('Login button pressed', loginData);
     // const data = {username: 'ilkkamtk', password: 'q1w2e3r4'};
@@ -24,7 +23,7 @@ const LoginForm = (props) => {
       const loginResult = await postLogin(loginData);
       console.log('logIn', loginResult);
       await AsyncStorage.setItem('userToken', loginResult.token);
-      setUser(loginResult.setUser);
+      setUser(loginResult.user);
       setIsLoggedIn(true);
     } catch (error) {
       console.error('logIn', error);
@@ -33,47 +32,40 @@ const LoginForm = (props) => {
   };
 
   return (
-    <View style={{width: 400}}>
-      <Card>
-        <Card.Title>Login</Card.Title>
-        <Controller
-          control={control}
-          rules={{required: true, minLength: 3}}
-          render={({field: {onChange, onBlur, value}}) => (
-            <Input
-              placeholder="Username"
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-            />
-          )}
-          name="username"
-        />
-        {errors.username?.type === 'required' && <Text>is required</Text>}
-        {errors.username?.type === 'minLength' && (
-          <Text>min length is 3 characters</Text>
+    <Card>
+      <Card.Title>Login Form</Card.Title>
+      <Controller
+        control={control}
+        rules={{required: {value: true, message: 'is required'}}}
+        render={({field: {onChange, onBlur, value}}) => (
+          <Input
+            placeholder="Username"
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            errorMessage={errors.username && errors.username.message}
+          />
         )}
-        <Controller
-          control={control}
-          rules={{required: true, minLength: 5}}
-          render={({field: {onChange, onBlur, value}}) => (
-            <Input
-              placeholder="Password"
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              secureTextEntry={true}
-            />
-          )}
-          name="password"
-        />
-        {errors.password && <Text>Password (min. 5 chars) is required .</Text>}
-        <Button title="Log in" onPress={handleSubmit(logIn)} />
-      </Card>
-    </View>
+        name="username"
+      />
+      <Controller
+        control={control}
+        rules={{required: {value: true, message: 'is required'}}}
+        render={({field: {onChange, onBlur, value}}) => (
+          <Input
+            placeholder="Password"
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            secureTextEntry={true}
+            errorMessage={errors.password && errors.password.message}
+          />
+        )}
+        name="password"
+      />
+      <Button title="Sign in!" onPress={handleSubmit(logIn)} />
+    </Card>
   );
 };
-
-LoginForm.propTypes = {};
 
 export default LoginForm;
