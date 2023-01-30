@@ -10,5 +10,4 @@ const App = () => {
     </MainProvider>
   );
 };
-
 export default App;
